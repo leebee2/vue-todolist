@@ -1,19 +1,15 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem,index) in this.$store.state.todoItems" 
-          v-bind:key="todoItem.item"
-          class="shadow">
-        <span class="checkBtn" 
-              v-bind:class="{checkBtnCompleted : todoItem.completed}"
-              v-on:click="toggleComplete(todoItem, index)">
-          <font-awesome-icon icon="fa-solid fa-check"/>
+      <li v-for="(todoItem,index) in this.storageTodoItems" v-bind:key="todoItem.item" class="shadow">
+        <span class="checkBtn" v-bind:class="{checkBtnCompleted : todoItem.completed}"
+          v-on:click="toggleComplete({ todoItem, index })">
+          <font-awesome-icon icon="fa-solid fa-check" />
         </span>
-        <!-- v-bind:class 동적인 값을 부여할 수 있는데 값을 통해 class 적용/해제할 수 있음-->
         <span v-bind:class="{textCompleted : todoItem.completed}">
           {{todoItem.item}}
         </span>
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn" v-on:click="removeTodo({ todoItem, index })">
           <font-awesome-icon icon="fa-solid fa-trash" />
         </span>
       </li>
@@ -22,18 +18,18 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
+
 export default {
-  // props : ['propsdata'],
-  methods : {
-    removeTodo(todoItem, index) {
-      // this.$emit('removeItem', todoItems, index);
-      this.$store.commit('removeOneItem', {todoItem, index});
-    },
-    toggleComplete(todoItem, index){
-      // this.$emit('toggleItem', todoItems, index);
-      this.$store.commit('toggleOnItem', {todoItem, index});
-    }
+  methods: {
+    ...mapMutations({
+      removeTodo: 'removeOneItem',
+      toggleComplete: 'toggleOnItem'
+    })
   },
+  computed: {
+    ...mapGetters(['storageTodoItems']),
+  }
 }
 </script>
 

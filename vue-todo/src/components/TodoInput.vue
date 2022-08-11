@@ -32,8 +32,6 @@ export default {
   methods : {
     addTodo() {
       if(this.newtodoItems !== ''){
-        // this.$emit('이벤트 이름', 인자1, 인자2, ...);
-        // this.$emit('addtodoItems', this.newtodoItems);
         this.$store.commit('addOneItem', this.newtodoItems);
         this.clearInput();
       }else if(!this.showModal){
