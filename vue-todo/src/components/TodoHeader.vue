@@ -1,16 +1,39 @@
 <template>
   <header>
-    <h1>TODO it!</h1>
+    <h3>나의 일정관리</h3>
+    <p>{{ this.todayTamp }}</p>
   </header>
 </template>
 
+<script>
+import getDate from './common/getDate';
+
+export default {
+  data() {
+    return {
+      todayTamp : "",
+    }
+  },
+  created() {
+    this.todayTamp = `${getDate().year}/${getDate().month}/${getDate().date} ${getDate().day}`
+  }
+}
+</script>
 
 <style scoped>
-/* scoped 속성 : 해당 컴포넌트 안에서만 존재하는 컴포넌트  */
-/* font-wdight : 폰트의 굴기 */
-h1 {
+header{
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+h3 {
+    text-align: left;
     color : #73556a;
     font-weight : 900;
-    margin : 2.5rem 0 1.5rem;
+}
+p {
+  text-align: right;
+  color: #73556a;
 }
 </style>

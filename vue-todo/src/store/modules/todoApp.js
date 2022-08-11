@@ -1,6 +1,9 @@
+import getDate from '../../components/common/getDate';
+
 const storage = {
     fetch() {
-        const arr = [];
+        let arr = [];
+        let sortArr = [];
 
         if (localStorage.length > 0) {
             for (let i = 0; i < localStorage.length; i++) {
@@ -8,30 +11,43 @@ const storage = {
                     arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
                 }
             }
+
+            sortArr = arr.sort((a, b) => a.time - b.time);
         }
 
-        return arr;
+        return sortArr;
     }
 };
 
 const state = {
-    todoItems : storage.fetch(),
+    todoItems: storage.fetch(),
 }
 
 const getters = {
     storageTodoItems(state) {
         return state.todoItems;
-  }   
+    },
+    itemCount(state) {
+        let successCount = state.todoItems.filter(item => item.completed === true).length;
+        let totalCount = state.todoItems.length;
+
+        return { totalCount, successCount }
+    }
 }
 
 const mutations = {
-    addOneItem (state, todoItem) {
-        const obj = { completed: false, item: todoItem };
+    addOneItem(state, todoItem) {
+        const obj = {
+            completed: false,
+            item: todoItem,
+            time: getDate().time,
+            date: `${getDate().month}.${getDate().date} ${getDate().day}`
+        };
 
         localStorage.setItem(todoItem, JSON.stringify(obj));
         state.todoItems.push(obj);
     },
-    removeOneItem (state, payload) {
+    removeOneItem(state, payload) {
         localStorage.removeItem(payload.todoItem.item);
         state.todoItems.splice(payload.index, 1);
     },
@@ -42,7 +58,7 @@ const mutations = {
         localStorage.removeItem(todoItem.item);
         localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItems (state) {
+    clearAllItems(state) {
         localStorage.clear();
         state.todoItems = [];
     }

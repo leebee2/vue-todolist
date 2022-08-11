@@ -1,7 +1,7 @@
 <template>
   <div class="inputBox shadow">
     <!-- v-model : input에 입력된 텍스트값을 맵핑하는 역할 -->
-    <input type="text" @keypress.enter.prevent="addTodo" v-model="newtodoItems" />
+    <input type="text" @keypress.enter.prevent="addTodo" placeholder="할일을 입력해주세요." v-model="newtodoItems" />
     <span class="addContainer" v-on:click="addTodo">
       <font-awesome-icon icon="fa-solid fa-plus" class="addBtn" />
     </span>
@@ -58,6 +58,8 @@ input:focus {
   height : 50px;
   line-height: 50px;
   border-radius: 5px;
+  max-width: 720px;
+  margin: 0 auto;
 }
 .inputBox input {
   border-style: none;
