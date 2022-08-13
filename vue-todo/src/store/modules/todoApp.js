@@ -21,7 +21,8 @@ const storage = {
 
 const state = {
     todoItems: storage.fetch(),
-    allchecked : false,
+    allchecked: false,
+    selected: "asc",
 }
 
 const getters = {
@@ -37,11 +38,14 @@ const getters = {
     getchecked(state) {
         const checked = state.todoItems.filter(item => item.completed === true);
         const allChecked = checked.length == state.todoItems.length;
-        
+
         state.allchecked = state.todoItems.length === 0 ? false : allChecked;
     
         return state.allchecked;
     },
+    getSelected(state) {
+        return state.selected;
+    }
 }
 
 const mutations = {
@@ -85,6 +89,19 @@ const mutations = {
             console.log('클릭안됌')
         }
     },
+    sortTodo(state, payload) {
+        state.selected = payload.target.value;
+
+        if (state.selected === "desc") {
+            state.todoItems.sort(function (a, b) {
+                return b.time - a.time;
+            });
+        } else if (state.selected === "asc") {
+            state.todoItems.sort(function (a, b) {
+                return a.time - b.time;
+            });
+        }
+    }
 }
 
 export default {

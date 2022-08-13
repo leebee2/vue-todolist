@@ -5,7 +5,6 @@
     <span class="addContainer" v-on:click="addTodo">
       <font-awesome-icon icon="fa-solid fa-plus" class="addBtn" />
     </span>
-
     <alertModal v-if="showModal" @close="showModal = false">
       <!-- 
           slot : 모달에 있는 값을 재정의하는

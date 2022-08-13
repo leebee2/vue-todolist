@@ -2,8 +2,8 @@
   <div id="app">
     <TodoHeader />
     <TodoTitle />
-    <TodoMiddle />
     <TodoInput />
+    <TodoMiddle />
     <TodoList />
     <TodoFooter />
   </div>
