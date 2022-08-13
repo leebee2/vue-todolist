@@ -21,6 +21,7 @@ const storage = {
 
 const state = {
     todoItems: storage.fetch(),
+    allchecked : false,
 }
 
 const getters = {
@@ -32,7 +33,15 @@ const getters = {
         let totalCount = state.todoItems.length;
 
         return { totalCount, successCount }
-    }
+    },
+    getchecked(state) {
+        const checked = state.todoItems.filter(item => item.completed === true);
+        const allChecked = checked.length == state.todoItems.length;
+        
+        state.allchecked = state.todoItems.length === 0 ? false : allChecked;
+    
+        return state.allchecked;
+    },
 }
 
 const mutations = {
@@ -61,7 +70,21 @@ const mutations = {
     clearAllItems(state) {
         localStorage.clear();
         state.todoItems = [];
-    }
+    },
+    checkAllItem(state) {
+        if (state.todoItems.length > 0) {
+            state.allchecked = !state.allchecked;
+
+            localStorage.clear();
+
+            for (let i = 0; i < state.todoItems.length; i++) {
+                state.todoItems[i].completed = state.allchecked;
+                localStorage.setItem(state.todoItems[i].item, JSON.stringify(state.todoItems[i]));
+            }
+        } else {
+            console.log('클릭안됌')
+        }
+    },
 }
 
 export default {

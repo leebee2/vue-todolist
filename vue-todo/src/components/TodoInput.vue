@@ -50,6 +50,10 @@ export default {
 </script>
 
 <style scoped>
+input {
+  border-style: groove;
+  width: 200px;
+}
 input:focus {
   outline: none;
 }

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-      <TodoHeader />
-      <TodoTitle />
-      <TodoInput />
-      <TodoMiddle />
-      <TodoList />
-      <TodoFooter />
+    <TodoHeader />
+    <TodoTitle />
+    <TodoMiddle />
+    <TodoInput />
+    <TodoList />
+    <TodoFooter />
   </div>
 </template>
 
@@ -40,15 +40,9 @@ body {
   font-weight: 400;
   line-height: 1.5;
 }
-input {
-  border-style: groove;
-  width: 200px;
-}
-
 button {
   border-style: groove;
 }
-
 .shadow {
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
 }

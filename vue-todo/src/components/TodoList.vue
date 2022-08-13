@@ -84,12 +84,12 @@ li {
 
 
 .checkBtn {
-  color: #62acde;
+  color: #b3adad;
   margin-right: 10px;
 }
 
 .checkBtnCompleted {
-  color: #b3adad;
+  color: #62acde;
 }
 
 .textCompleted {

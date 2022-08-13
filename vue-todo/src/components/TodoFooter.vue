@@ -1,34 +1,20 @@
 <template>
-  <div class="clearAllContainer">
-    <span class="claerAllBtn" v-on:click="clearTodo">전체삭제</span>
+  <div class="footer">
+    Made by Soyeon
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-
 export default {
-  methods: {
-    ...mapMutations({
-      clearTodo: 'clearAllItems'
-    })
-  }
 }
 </script>
 
 
-<style scoped>
-/* scoped : 해당 스크립트에서만 스타일이 적용될 수 있게 하는 속성 */
-.clearAllContainer{
-  width: 8.5rem;
-  height: 50px;
-  line-height: 50px;
-  background-color: white;
-  border-radius: 5px;
-  margin : 0 auto;
-}
-.claerAllBtn{
-  color : #e20303;
-  display: block;
+<style>
+.footer{
+  color: #b3adad;
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 12px;
 }
 </style>
